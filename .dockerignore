@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/Logs/
+DevReviewFrontend/
+**/*.user
+**/.vs/
+.git/
+.gitignore
+README.md

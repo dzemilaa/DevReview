@@ -1,0 +1,26 @@
+# Secrets - never commit these
+appsettings.Development.json
+appsettings.Production.json
+.env
+.env.local
+.env.production
+
+# Build outputs
+**/bin/
+**/obj/
+**/dist/
+**/node_modules/
+
+# Logs
+**/Logs/
+*.log
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db

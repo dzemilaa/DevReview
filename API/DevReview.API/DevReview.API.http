@@ -1,0 +1,6 @@
+@DevReview.API_HostAddress = http://localhost:5147
+
+GET {{DevReview.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

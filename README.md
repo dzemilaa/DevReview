@@ -241,5 +241,3 @@ npm run dev
 
 Frontend je dostupan na `http://localhost:5173`.
 
- | Admin |
-| DELETE | `/admin/comments/{id}` | Brisanje komentara | Admin |

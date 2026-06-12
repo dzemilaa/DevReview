@@ -7,10 +7,8 @@ Platforma za code review i mentorstvo koja omogućava programerima da dobiju str
 ## Sadržaj
 
 - [Arhitektura](#arhitektura)
-- [Tehnološki stack](#tehnološki-stack)
 - [ER dijagram](#er-dijagram)
 - [Pokretanje projekta](#pokretanje-projekta)
-- [API pregled](#api-pregled)
 
 ---
 
@@ -39,9 +37,6 @@ DevReview/
 
 **Frontend** — React 19 SPA sa TypeScript-om. Komunikacija sa API-jem ide kroz Axios, stanje aplikacije se drži u Zustand storeu, a server state (keširanje, sinhronizacija) upravlja TanStack React Query.
 
----
-
-## Tehnološki stack
 
 ### Backend
 
@@ -246,87 +241,5 @@ npm run dev
 
 Frontend je dostupan na `http://localhost:5173`.
 
-### Logovi
-
-Serilog upisuje logove u konzolu i u fajlove u `DevReview.API/Logs/` direktorijumu. Fajlovi se rotiraju dnevno i čuvaju 14 dana.
-
----
-
-## API pregled
-
-Sve rute su prefixovane sa `/api/v1` (konvencija definisana u `ApiRouteConvention`).
-
-### Autentifikacija
-
-| Metoda | Ruta | Opis | Auth |
-|---|---|---|---|
-| POST | `/auth/register` | Registracija novog korisnika | — |
-| POST | `/auth/login` | Prijava, vraća JWT tokene | — |
-| POST | `/auth/refresh` | Obnavljanje access tokena | — |
-| POST | `/auth/logout` | Odjava, poništava refresh token | ✓ |
-| GET | `/auth/me` | Podaci o prijavljenom korisniku | ✓ |
-
-### Review requestovi
-
-| Metoda | Ruta | Opis | Auth |
-|---|---|---|---|
-| GET | `/review-requests/public` | Javni requestovi | — |
-| GET | `/review-requests` | Svi requestovi | ✓ |
-| GET | `/review-requests/my` | Moji requestovi | ✓ |
-| GET | `/review-requests/claimed-by-me` | Preuzeti requestovi | Mentor |
-| GET | `/review-requests/{id}` | Detalji requesta | — |
-| POST | `/review-requests` | Kreiranje requesta | ✓ |
-| POST | `/review-requests/{id}/claim` | Preuzimanje requesta | Mentor |
-| POST | `/review-requests/{id}/abandon` | Odustajanje od requesta | Mentor |
-| POST | `/review-requests/{id}/finalize` | Predaja finalnog reviewa | Mentor |
-| POST | `/review-requests/{id}/approve` | Odobravanje reviewa | ✓ |
-| POST | `/review-requests/{id}/comments` | Dodavanje komentara | ✓ |
-| POST | `/review-requests/{id}/comments/{cId}/resolve` | Rješavanje komentara | Mentor |
-| POST | `/review-requests/{id}/comments/{cId}/apply` | Primjena prijedloga | ✓ |
-| POST | `/review-requests/{id}/rate` | Ocjenjivanje | ✓ |
-| POST | `/review-requests/parse-zip` | Parsiranje ZIP arhive (max 5MB) | ✓ |
-
-### Mentori
-
-| Metoda | Ruta | Opis | Auth |
-|---|---|---|---|
-| GET | `/mentors/top` | Rang lista mentora | — |
-| GET | `/mentors/{id}` | Profil mentora | — |
-| GET | `/mentors/following` | ID-evi praćenih mentora | ✓ |
-| GET | `/mentors/following/details` | Detalji praćenih mentora | ✓ |
-| POST | `/mentors/{id}/follow` | Praćenje mentora | ✓ |
-| DELETE | `/mentors/{id}/follow` | Prestanak praćenja | ✓ |
-
-### Office Hours
-
-| Metoda | Ruta | Opis | Auth |
-|---|---|---|---|
-| GET | `/office-hours/available` | Dostupni termini | — |
-| GET | `/office-hours/my-bookings` | Moje rezervacije | ✓ |
-| GET | `/office-hours/mentor/schedule` | Raspored mentora | Mentor |
-| POST | `/office-hours` | Kreiranje termina | Mentor |
-| POST | `/office-hours/{id}/book` | Rezervacija termina | ✓ |
-| POST | `/office-hours/{id}/cancel` | Otkazivanje rezervacije | ✓ |
-| POST | `/office-hours/{id}/feedback` | Slanje feedbacka | ✓ |
-
-### Ostalo
-
-| Metoda | Ruta | Opis | Auth |
-|---|---|---|---|
-| GET | `/profiles/me` | Moj profil | ✓ |
-| PUT | `/profiles/me` | Uređivanje profila | ✓ |
-| GET | `/notifications` | Lista obavještenja | ✓ |
-| POST | `/notifications/{id}/read` | Označavanje pročitanim | ✓ |
-| POST | `/notifications/read-all` | Sve označiti pročitanim | ✓ |
-| GET | `/search/review-requests` | Pretraga requestova | — |
-| GET | `/search/mentors` | Pretraga mentora | — |
-| GET | `/tags` | Lista tagova | — |
-| POST | `/tags` | Kreiranje taga | Admin |
-| PUT | `/tags/{id}` | Uređivanje taga | Admin |
-| DELETE | `/tags/{id}` | Brisanje taga | Admin |
-| GET | `/admin/users` | Lista korisnika | Admin |
-| POST | `/admin/users/{id}/block` | Blokiranje korisnika | Admin |
-| POST | `/admin/users/{id}/unblock` | Odblokiranje korisnika | Admin |
-| GET | `/admin/statistics` | Sistemske statistike | Admin |
-| DELETE | `/admin/review-requests/{id}` | Brisanje requesta | Admin |
+ | Admin |
 | DELETE | `/admin/comments/{id}` | Brisanje komentara | Admin |
